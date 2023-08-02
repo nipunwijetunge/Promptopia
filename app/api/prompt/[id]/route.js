@@ -16,12 +16,12 @@ export const GET = async (request, { params }) => {
 };
 
 export const PATCH = async (request, { params }) => {
-  const { prompt, tag } = request.json();
+  const { prompt, tag } = await request.json();
 
   try {
     await connectToDatabase();
 
-    const existingPrompt = await Prompt.findBy(params.id);
+    const existingPrompt = await Prompt.findById(params.id);
 
     if (!existingPrompt)
       return new Response("Prompt not found.", { status: 404 });
