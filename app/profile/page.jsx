@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
 import Profile from "@components/Profile";
-import { DELETE } from "@app/api/prompt/[id]/route";
 
 const MyProfile = () => {
   const { data: session } = useSession();
@@ -35,8 +34,8 @@ const MyProfile = () => {
 
     if (hasConfirmed) {
       try {
-        await fetch(`/api/prompt/${post._id}`, {
-          method: DELETE,
+        await fetch(`/api/prompt/${post._id.toString()}`, {
+          method: "DELETE",
         });
 
         const filteredPosts = posts.filter((p) => p._id !== post._id);

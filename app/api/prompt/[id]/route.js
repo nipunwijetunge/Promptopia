@@ -41,12 +41,7 @@ export const DELETE = async (request, { params }) => {
   try {
     await connectToDatabase();
 
-    const existingPrompt = await Prompt.findById(params.id);
-
-    if (!existingPrompt)
-      return new Response("Prompt does not exist!", { status: 404 });
-
-    await existingPrompt.remove();
+    await Prompt.findByIdAndRemove(params.id);
 
     return new Response("Prompt deleted successfully!", { status: 200 });
   } catch (error) {
